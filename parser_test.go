@@ -1,13 +1,13 @@
 package parser_test
 
 import (
+	"github.com/antlr4-go/antlr/v4"
 	"os"
 	"path"
 	"strings"
 	"testing"
 
 	dmparser "github.com/413008319/dm-parser"
-	"github.com/antlr4-go/antlr/v4"
 	"github.com/stretchr/testify/require"
 )
 
@@ -79,5 +79,31 @@ func TestDmparser(t *testing.T) {
 			require.Equal(t, 0, lexerErrors.errors)
 			require.Equal(t, 0, parserErrors.errors)
 		})
+	}
+}
+func TestDmparser2(t *testing.T) {
+	statement := `select * from aaa;`
+	lexer := dmparser.NewDmSqlLexer(antlr.NewInputStream(statement))
+	stream := antlr.NewCommonTokenStream(lexer, 0)
+	p := dmparser.NewDmSqlParser(stream)
+
+	lexerErrors := &CustomErrorListener{}
+	lexer.RemoveErrorListeners()
+	lexer.AddErrorListener(lexerErrors)
+
+	parserErrors := &CustomErrorListener{}
+	p.RemoveErrorListeners()
+	p.AddErrorListener(parserErrors)
+
+	p.BuildParseTrees = true
+	tree := p.Dmprogram()
+
+	for _, item := range tree.GetChildren() {
+		if stmt, ok := item.(dmparser.ISql_clausesContext); ok {
+			lastToken := stream.Get(stmt.GetStop().GetTokenIndex())
+			text := stream.GetTextFromTokens(stmt.GetStart(), lastToken)
+			print(text)
+		}
+
 	}
 }

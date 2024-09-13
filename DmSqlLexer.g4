@@ -789,7 +789,7 @@ ZONE:                                  'ZONE';
 
 
 // Skip
-WHILE_SPACE:                           [ \t\r\n]+    -> skip;
+WHILE_SPACE:                           [ \t\r\n]+    -> channel(HIDDEN);
 WHILE_COMMENT:                         '/*' (COMMENT | .)*? '*/' -> channel(HIDDEN);
 LINE_COMMENT:                          '--' ~[\r\n]* -> channel(HIDDEN);
 
