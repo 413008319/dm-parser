@@ -6524,8 +6524,8 @@ func dmsqlparserParserInit() {
 		5, 827, 0, 0, 10545, 10548, 3, 1418, 709, 0, 10546, 10548, 3, 2192, 1096,
 		0, 10547, 10545, 1, 0, 0, 0, 10547, 10546, 1, 0, 0, 0, 10547, 10548, 1,
 		0, 0, 0, 10548, 10558, 1, 0, 0, 0, 10549, 10558, 3, 1486, 743, 0, 10550,
-		10551, 3, 2162, 1081, 0, 10551, 10552, 5, 826, 0, 0, 10552, 10553, 3, 334,
-		167, 0, 10553, 10555, 5, 827, 0, 0, 10554, 10556, 3, 1482, 741, 0, 10555,
+		10551, 3, 2162, 1081, 0, 10551, 10552, 5, 826, 0, 0, 10552, 10553, 3, 332,
+		166, 0, 10553, 10555, 5, 827, 0, 0, 10554, 10556, 3, 1482, 741, 0, 10555,
 		10554, 1, 0, 0, 0, 10555, 10556, 1, 0, 0, 0, 10556, 10558, 1, 0, 0, 0,
 		10557, 10495, 1, 0, 0, 0, 10557, 10499, 1, 0, 0, 0, 10557, 10508, 1, 0,
 		0, 0, 10557, 10514, 1, 0, 0, 0, 10557, 10522, 1, 0, 0, 0, 10557, 10535,
@@ -165244,7 +165244,7 @@ type INormal_tvContext interface {
 	On_error() IOn_errorContext
 	Normal_tv_derived_table() INormal_tv_derived_tableContext
 	Full_tv_name() IFull_tv_nameContext
-	Column_list2() IColumn_list2Context
+	Column_list() IColumn_listContext
 	Normal_tv_derived_table_options() INormal_tv_derived_table_optionsContext
 
 	// IsNormal_tvContext differentiates from other interfaces.
@@ -165583,10 +165583,10 @@ func (s *Normal_tvContext) Full_tv_name() IFull_tv_nameContext {
 	return t.(IFull_tv_nameContext)
 }
 
-func (s *Normal_tvContext) Column_list2() IColumn_list2Context {
+func (s *Normal_tvContext) Column_list() IColumn_listContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IColumn_list2Context); ok {
+		if _, ok := ctx.(IColumn_listContext); ok {
 			t = ctx.(antlr.RuleContext)
 			break
 		}
@@ -165596,7 +165596,7 @@ func (s *Normal_tvContext) Column_list2() IColumn_list2Context {
 		return nil
 	}
 
-	return t.(IColumn_list2Context)
+	return t.(IColumn_listContext)
 }
 
 func (s *Normal_tvContext) Normal_tv_derived_table_options() INormal_tv_derived_table_optionsContext {
@@ -165970,7 +165970,7 @@ func (p *DmSqlParser) Normal_tv() (localctx INormal_tvContext) {
 		}
 		{
 			p.SetState(10552)
-			p.Column_list2()
+			p.Column_list()
 		}
 		{
 			p.SetState(10553)

@@ -4007,7 +4007,7 @@ normal_tv :
     | XMLTABLE '(' exp xml_passing? xmlcoldef_lst_options? ')' alias_option?
     | JSON_TABLE '(' argument COMMA LT_STRING on_error? jsoncol_lst ')' (as_alias | alias)?
     | normal_tv_derived_table
-    | full_tv_name '(' column_list2 ')' normal_tv_derived_table_options?
+    | full_tv_name '(' column_list ')' normal_tv_derived_table_options?
     ;
 
 xml_passing :
