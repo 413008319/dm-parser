@@ -3799,9 +3799,10 @@ select_item_list :
     ;
 
 select_item :
-    exp (alias | AS alias_2)
+    '*'
+    | full_table_name '.' '*'
+    | exp (alias | AS alias_2)
     | bool_exp
-    | '*'
     ;
 
 as_alias :
